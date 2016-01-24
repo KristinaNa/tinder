@@ -1,6 +1,7 @@
 {% extends "__base.html" %}
 {% block content %}
-        {% if other_users_photos %}
+    {% if other_users_photos %}
+        
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
   <ol class="carousel-indicators">
@@ -33,20 +34,13 @@
   </a>
 </div>
 
+<ul>
+    {% for photo in other_users_photos %}
+        <li><a href="/{{ photo.foto }}">{{ photo.foto }}</a></li>
+    {% endfor %}
+</ul>
 
-
-
-
-
-
-            <ul>
-                {% for photo in other_users_photos %}
-                    <li><a href="/{{ photo.foto }}">{{ photo.foto }}</a></li>
-                {% endfor %}
-            </ul>
-
-                </a>
-        {% else %}
-            <p>No photos.</p>
-        {% endif %}
+{% else %}
+    <p>No photos.</p>
+{% endif %}
 {% endblock content %}
