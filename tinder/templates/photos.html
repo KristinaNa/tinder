@@ -1,4 +1,6 @@
 {% extends "__base.html" %}
+{% load bootstrap3 %}
+
 {% block title %}Find partner{% endblock title %}
 {% block content %}
     {% if other_users_photos %}
@@ -8,6 +10,14 @@
                     <a class="thumbnail" href="#">
                         <img class="img-responsive" src="/{{ photo }}" alt="User picture">
                     </a>
+                    <form action="#" id="rating">
+                        <button type="button" class="btn btn-default btn-lg">
+                          <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-default btn-lg">
+                          <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+                        </button>
+                    </form>
                 </div>
             {% endfor %}
         </ul>
