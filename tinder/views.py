@@ -39,14 +39,18 @@ class LogoutView(View):
 class Photos(View):
     # template_name = "photos.html"
     def get(self, request):
-        current_user = request.user
-        other_users_photos = upload_foto.objects.values('foto').filter(~Q(user_id = current_user.id)).order_by('?').first().values()
         return render_to_response(
             'photos.html',
+           context_instance=RequestContext(request)
+        )
+    def post(self, request):
+        current_user = request.user
+        other_users_photos = upload_foto.objects.values('foto').filter(~Q(user_id = current_user.id)).order_by('?').first().values()[0]
+        return render_to_response(
+            'photo_content.html',
             { 'other_users_photos': other_users_photos},
            context_instance=RequestContext(request)
         )
-
 class List(View):
     def get(self, request):
         form = PhotoForm() # A empty, unbound form
