@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^logout/$', views.LogoutView.as_view()),
     url(r'^$', TemplateView.as_view(template_name='index.html'), name='main'),
     url(r'^my_photos/$', views.List.as_view()),
-    url(r'^photos/$', views.Photos.as_view())
+    url(r'^photos/$', views.Photos.as_view()),
+    url(r'^likes/$', views.Photos.as_view())
 
 ]

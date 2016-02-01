@@ -2,6 +2,7 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from tinder.models import upload_foto
+from tinder.models import rating
 from tinder.forms import PhotoForm
 from django.views.generic.edit import FormView
 from django.contrib.auth.forms import UserCreationForm
@@ -45,12 +46,18 @@ class Photos(View):
         )
     def post(self, request):
         current_user = request.user
-        other_users_photos = upload_foto.objects.values('foto').filter(~Q(user_id = current_user.id)).order_by('?').first().values()[0]
+        other_users_photos = upload_foto.objects.values('foto', 'id').filter(~Q(user_id = current_user.id)).order_by('?').first()
         return render_to_response(
             'photo_content.html',
-            { 'other_users_photos': other_users_photos},
+            { 'other_users_photos': other_users_photos },
            context_instance=RequestContext(request)
         )
+
+class Like_photo():
+    def post(self, request):
+        current_user = request.user
+        insert_like = rating(user_id=current_user,foto_id=1)
+        insert_like.save()
 class List(View):
     def get(self, request):
         form = PhotoForm() # A empty, unbound form

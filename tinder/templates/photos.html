@@ -6,12 +6,6 @@
 {% block script %}
     <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
     <script>
-        var a=0;
-        console.log(a);
-        function rate_photo(){
-            a +=1;
-            console.log(a);
-        }
 
         function next_photo(){
             $.ajax({
@@ -25,9 +19,20 @@
               }
           });
         }
+
+        function like_photo(){
+            $.ajax({
+              data: {
+                  csrfmiddlewaretoken: '{{ csrf_token }}'
+              },
+              type: "POST" ,
+              url: '/like_photo/',
+          });
+        }
     $(document).ready(function() {
         next_photo();
         $("#like").on("click",function() {
+            like_photo();
             next_photo();
         });
         $("#dislike").on("click",function() {

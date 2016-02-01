@@ -12,3 +12,7 @@ class upload_foto(models.Model):
     user_id = models.IntegerField()
     #foto = models.CharField(max_length=30)
     foto = models.FileField(upload_to='documents')
+
+class rating(models.Model):
+    user_id = models.IntegerField()
+    foto_id = models.IntegerField()
