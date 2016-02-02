@@ -1,16 +1,31 @@
 {% extends "__base.html" %}
 {% load bootstrap3 %}
 {% load static %}
-
 {% block title %}Find partner{% endblock title %}
 {% block script %}
+
     <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
     <script>
+    $(document).ready(function() {
+        next_photo();
 
-        function next_photo(){
+        $("#like").on("click",function f1(){
+            photo_id = $("#user_photo").attr("data-photoid");
+            next_photo();
+           // console.log(a);
+            return photo_id;
+        });
+        $("#dislike").on("click",function() {
+            next_photo();
+        });
+    });
+
+    function next_photo(){
+        photo_id = f1();
             $.ajax({
               data: {
-                  csrfmiddlewaretoken: '{{ csrf_token }}'
+                  csrfmiddlewaretoken: '{{ csrf_token }}',
+                  photo_id: photo_id
               },
               type: "POST" ,
               url: '/photos/',
@@ -20,37 +35,20 @@
           });
         }
 
-        function like_photo(){
-            $.ajax({
-              data: {
-                  csrfmiddlewaretoken: '{{ csrf_token }}'
-              },
-              type: "POST" ,
-              url: '/like_photo/',
-          });
-        }
-    $(document).ready(function() {
-        next_photo();
-        $("#like").on("click",function() {
-            like_photo();
-            next_photo();
-        });
-        $("#dislike").on("click",function() {
-            next_photo();
-        });
-    });
     </script>
 {% endblock script %}
 
 {% block content %}
         <div class="col-lg-3 col-md-3 col-xs-6 thumb" align="center">
         <div id="photo">
+
             {% include "photo_content.html" %}
         </div>
             <form action="#" id="rating_form">
                 <button type="button" class="btn btn-default btn-lg" id="like">
                   <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
                 </button>
+
                 <button type="button" class="btn btn-default btn-lg" id="dislike" >
                   <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
                 </button>

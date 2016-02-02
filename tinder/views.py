@@ -45,19 +45,18 @@ class Photos(View):
            context_instance=RequestContext(request)
         )
     def post(self, request):
+
+        photo_id = request.POST.get('photo_id')
         current_user = request.user
         other_users_photos = upload_foto.objects.values('foto', 'id').filter(~Q(user_id = current_user.id)).order_by('?').first()
+        insert_like = rating(user_id=current_user.id,foto_id= photo_id)
+        insert_like.save()
         return render_to_response(
             'photo_content.html',
             { 'other_users_photos': other_users_photos },
            context_instance=RequestContext(request)
         )
 
-class Like_photo():
-    def post(self, request):
-        current_user = request.user
-        insert_like = rating(user_id=current_user,foto_id=1)
-        insert_like.save()
 class List(View):
     def get(self, request):
         form = PhotoForm() # A empty, unbound form
