@@ -46,15 +46,12 @@ class Photos(View):
         )
     def post(self, request):
         current_user = request.user
+        rated_photos = rating.objects.values_list('foto_id', flat=True).filter(user_id = current_user.id)
+        all_photos = upload_foto.objects.values('foto','id').filter(~Q(user_id = 2)).exclude(id__in=rated_photos).order_by('?').first()
 
-        #SELECT foto_id FROM tinder_rating WHERE user_id = 2     //    [25, 27]
-        #SELECT foto FROM tinder_upload_foto WHERE user_id != 2 AND id NOT IN (25, 27)
-        rated_photos = rating.objects.values('foto_id').filter(user_id = current_user.id)
-        all_photos = upload_foto.objects.values('foto').filter(~Q(user_id = current_user.id)).exclude(rated_photos).order_by('?').first()
-
-        other_users_photos = upload_foto.objects.values('foto', 'id').filter(~Q(user_id = current_user.id)).order_by('?').first()
+        #other_users_photos = upload_foto.objects.values('foto', 'id').filter(~Q(user_id = current_user.id)).order_by('?').first()
         #points = SinglePoint.objects.filter(connection__vektordata__order__project__slug=slug)
-        not_rated_photos = rating.objects.values('foto_id').filter(~Q(user_id = current_user.id))
+        #not_rated_photos = rating.objects.values('foto_id').filter(~Q(user_id = current_user.id))
 
         if request.POST.get('photo_id'):
             photo_id = request.POST.get('photo_id')
@@ -63,7 +60,7 @@ class Photos(View):
 
         return render_to_response(
             'photo_content.html',
-            { 'other_users_photos': other_users_photos },
+            { 'other_users_photos': all_photos },
            context_instance=RequestContext(request)
         )
 
