@@ -47,12 +47,7 @@ class Photos(View):
     def post(self, request):
         current_user = request.user
         rated_photos = rating.objects.values_list('foto_id', flat=True).filter(user_id = current_user.id)
-        all_photos = upload_foto.objects.values('foto','id').filter(~Q(user_id = 2)).exclude(id__in=rated_photos).order_by('?').first()
-
-        #other_users_photos = upload_foto.objects.values('foto', 'id').filter(~Q(user_id = current_user.id)).order_by('?').first()
-        #points = SinglePoint.objects.filter(connection__vektordata__order__project__slug=slug)
-        #not_rated_photos = rating.objects.values('foto_id').filter(~Q(user_id = current_user.id))
-
+        all_photos = upload_foto.objects.values('foto','id').filter(~Q(user_id = current_user.id)).exclude(id__in=rated_photos).order_by('?').first()
         if request.POST.get('photo_id'):
             photo_id = request.POST.get('photo_id')
             insert_like = rating(user_id=current_user.id,foto_id= photo_id)

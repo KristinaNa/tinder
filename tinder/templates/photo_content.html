@@ -1,3 +1,7 @@
-    <a class="thumbnail">
+{% if other_users_photos|length > 0 %}
+   <a class="thumbnail">
         <img class="img-responsive" id="user_photo" data-photoid="{{ other_users_photos.id }}" src="/{{ other_users_photos.foto }}" alt="User picture">
     </a>
+{% else %}
+    <h2>No photos here :(</h2>
+{% endif %}
