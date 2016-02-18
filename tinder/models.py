@@ -15,4 +15,8 @@ class upload_foto(models.Model):
 
 class rating(models.Model):
     user_id = models.IntegerField()
-    foto_id = models.IntegerField()
+    #foto_id = models.IntegerField()
+    foto = models.ForeignKey('upload_foto', blank=True, null=True)
+
+class Meta:
+    app_label = 'app_model_belongs_to'

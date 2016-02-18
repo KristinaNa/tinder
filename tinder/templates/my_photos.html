@@ -19,9 +19,12 @@
                     <div class="col-lg-3 col-md-4 col-xs-6 thumb">
                             <a class="thumbnail" href="#">
                                 <img class="img-responsive" src="/{{ photo.foto }}" alt="User picture">
+                                {{ photo.id }}
+                                {{ photo.rating_set.count }}
                             </a>
                     </div>
                 {% endfor %}
+
             </div>
         </div>
     {% else %}

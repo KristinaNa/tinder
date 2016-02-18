@@ -13,6 +13,8 @@ from django.views.generic.base import View
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.db.models import Q
+from django.db.models import Count
+
 
 class RegisterFormView(FormView):
     form_class = UserCreationForm
@@ -48,8 +50,12 @@ class Photos(View):
         current_user = request.user
         rated_photos = rating.objects.values_list('foto_id', flat=True).filter(user_id = current_user.id)
         all_photos = upload_foto.objects.values('foto','id').filter(~Q(user_id = current_user.id)).exclude(id__in=rated_photos).order_by('?').first()
-        if request.POST.get('photo_id'):
-            photo_id = request.POST.get('photo_id')
+        photo_id = request.POST.get('photo_id')
+
+        #photo_rating = rating.objects.filter(foto_id = photo_id).count()
+
+        if photo_id:
+           # photo_id = request.POST.get('photo_id')
             insert_like = rating(user_id=current_user.id,foto_id= photo_id)
             insert_like.save()
 
@@ -63,11 +69,14 @@ class List(View):
     def get(self, request):
         form = PhotoForm() # A empty, unbound form
         current_user = request.user
-        photos = upload_foto.objects.filter(user_id = current_user.id).values()
+        photos = upload_foto.objects.filter(user_id = current_user.id)
         # Render list page with the documents and the form
+        photo_id = request.POST.get('photo_id')
+        photo_rating = rating.objects.filter(foto_id = photo_id).count()
+
         return render_to_response(
             'my_photos.html',
-            {'photos': photos, 'form': form },
+            {'photos': photos, 'form': form, 'photo_rating': photo_rating },
             context_instance=RequestContext(request)
         )
     def post(self, request):
