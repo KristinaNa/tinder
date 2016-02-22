@@ -38,9 +38,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tinder',
-    'bootstrap3',
-    'dajaxice',
-    'dajax'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -87,17 +84,11 @@ TEMPLATE_CONTEXT_PROCESSORS = (
    'django.contrib.messages.context_processors.messages'
 )
 
-DAJAX_FUNCTIONS=(
-'examples.ajax.dajaxice_example',
-)
 
 STATICFILES_FINDERS = (
    'django.contrib.staticfiles.finders.FileSystemFinder',
    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-   'dajaxice.finders.DajaxiceFinder',
 )
-
-DAJAXICE_MEDIA_PREFIX = 'dajaxice'
 
 WSGI_APPLICATION = 'mytinder.wsgi.application'
 
