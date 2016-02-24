@@ -87,3 +87,12 @@ class List(View):
             newdoc.save()
             # Redirect to the document list after POST
             return redirect('/my_photos')
+
+class History(View):
+    def get(self, request):
+        photos = upload_foto.objects.values()
+        return render_to_response(
+            'history.html',
+            {'photos': photos},
+            context_instance=RequestContext(request)
+        )

@@ -12,11 +12,16 @@ class upload_foto(models.Model):
     user_id = models.IntegerField()
     #foto = models.CharField(max_length=30)
     foto = models.FileField(upload_to='documents')
+    created_at = models.DateTimeField(auto_now_add=True)
 
 class rating(models.Model):
     user_id = models.IntegerField()
     #foto_id = models.IntegerField()
     foto = models.ForeignKey('upload_foto', blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+
 
 class Meta:
     app_label = 'app_model_belongs_to'
+

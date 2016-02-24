@@ -11,7 +11,10 @@ urlpatterns = [
     url(r'^register/$', views.RegisterFormView.as_view()),
     url(r'^login/$', views.LoginFormView.as_view()),
     url(r'^logout/$', views.LogoutView.as_view()),
-    url(r'^$', TemplateView.as_view(template_name='index.html'), name='main'),
+
+    #url(r'^$', TemplateView.as_view(template_name='history.html'), name='main'),
+    url(r'^$', views.History.as_view()),
+
     url(r'^my_photos/$', views.List.as_view()),
     url(r'^photos/$', views.Photos.as_view()),
 

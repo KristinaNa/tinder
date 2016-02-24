@@ -2,8 +2,9 @@
 {% block title %}Main page{% endblock title %}
 {% block content %}
     {% if user.is_authenticated %}
-        Hi, {{ user }}
-        {{ user.id }}
+        {{ photos }}
+test
+
     {% else %}
         <center>
             <button type="button" class="btn btn-default navbar-btn" onclick="window.location.href='/login'" >Sign in</button>
