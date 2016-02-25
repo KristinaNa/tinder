@@ -22,6 +22,7 @@ class rating(models.Model):
 
 
 
+
 class Meta:
     app_label = 'app_model_belongs_to'
 

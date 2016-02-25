@@ -2,8 +2,9 @@
 {% block title %}Main page{% endblock title %}
 {% block content %}
     {% if user.is_authenticated %}
-        {{ photos }}
-test
+        {% for photo in photos %}
+            {{ photo.username }}
+        {% endfor %}
 
     {% else %}
         <center>
