@@ -91,8 +91,9 @@ class History(View):
     def get(self, request):
         user_id = upload_foto.objects.values_list('user_id', flat=True).distinct()
         result = User.objects.values('username').filter(id__in = user_id)
+        photo_rating = rating.objects.values('user_id', 'foto_id', 'created_at')
         return render_to_response(
             'history.html',
-            {'photos': result},
+            {'photos': result, 'photo_rating': photo_rating},
             context_instance=RequestContext(request)
         )

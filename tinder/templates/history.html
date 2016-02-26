@@ -6,6 +6,11 @@
             {{ photo.username }}
         {% endfor %}
 
+        {% for p in photo_rating %}
+            {{ p.user_id }}
+        {% endfor %}
+
+
     {% else %}
         <center>
             <button type="button" class="btn btn-default navbar-btn" onclick="window.location.href='/login'" >Sign in</button>
