@@ -2,6 +2,7 @@
 <html>
     <head>
         <title> {% block title %}{% endblock title %} </title>
+
     <style>
         #center {
             top: 50%; /* Отступ в процентах от верхнего края окна */
@@ -32,9 +33,16 @@
             top: 0px;
             right: 0px;
         }
+
+        th, td {
+            height: 115px;
+        }
+        .table{
+            align-self: auto;
+            overflow: auto;
+        }
     </style>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
-        <link href="/documents/login.css" rel="stylesheet">
         {% block script %}{% endblock script %}
     </head>
     <body>

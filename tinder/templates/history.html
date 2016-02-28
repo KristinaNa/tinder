@@ -2,15 +2,18 @@
 {% block title %}Main page{% endblock title %}
 {% block content %}
     {% if user.is_authenticated %}
-        {% for photo in photos %}
-            {{ photo.username }}
-        {% endfor %}
-
-        {% for p in photo_rating %}
-            {{ p.user_id }}
-        {% endfor %}
-
-
+        <div class="table" id="center">
+            <table>
+                <thead>
+                    {% for photo in rated_photos %}
+                        <tr>
+                            <td><b> {{photo.user__username}}</b> likes</td>
+                            <td><img src = "{{ photo.photo__photo }}" class = "img-rounded" width="100" height="100"></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     {% else %}
         <center>
             <button type="button" class="btn btn-default navbar-btn" onclick="window.location.href='/login'" >Sign in</button>

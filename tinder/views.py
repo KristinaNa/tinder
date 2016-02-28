@@ -47,16 +47,15 @@ class Photos(View):
         )
     def post(self, request):
         current_user = request.user
-        rated_photos = rating.objects.values_list('foto_id', flat=True).filter(user_id = current_user.id)
-        all_photos = upload_foto.objects.values('foto','id').filter(~Q(user_id = current_user.id)).exclude(id__in=rated_photos).order_by('?').first()
         photo_id = request.POST.get('photo_id')
-
-        #photo_rating = rating.objects.filter(foto_id = photo_id).count()
 
         if photo_id:
            # photo_id = request.POST.get('photo_id')
-            insert_like = rating(user_id=current_user.id,foto_id= photo_id)
+            insert_like = Rating(user_id=current_user.id,photo_id= photo_id)
             insert_like.save()
+
+        rated_photos = Rating.objects.values_list('photo_id', flat=True).filter(user_id = current_user.id)
+        all_photos = Photo.objects.values('photo','id').filter(~Q(user_id = current_user.id)).exclude(id__in=rated_photos).order_by('?').first()
 
         return render_to_response(
             'photo_content.html',
@@ -68,10 +67,10 @@ class List(View):
     def get(self, request):
         form = PhotoForm() # A empty, unbound form
         current_user = request.user
-        photos = upload_foto.objects.filter(user_id = current_user.id)
+        photos = Photo.objects.filter(user_id = current_user.id)
         # Render list page with the documents and the form
         photo_id = request.POST.get('photo_id')
-        photo_rating = rating.objects.filter(foto_id = photo_id).count()
+        photo_rating = Rating.objects.filter(photo_id = photo_id).count()
 
         return render_to_response(
             'my_photos.html',
@@ -81,7 +80,7 @@ class List(View):
     def post(self, request):
         form = PhotoForm(request.POST, request.FILES)
         if form.is_valid():
-            newdoc = upload_foto(foto = request.FILES['foto'])
+            newdoc = Photo(photo = request.FILES['foto'])
             newdoc.user_id = request.user.id
             newdoc.save()
             # Redirect to the document list after POST
@@ -89,11 +88,10 @@ class List(View):
 
 class History(View):
     def get(self, request):
-        user_id = upload_foto.objects.values_list('user_id', flat=True).distinct()
-        result = User.objects.values('username').filter(id__in = user_id)
-        photo_rating = rating.objects.values('user_id', 'foto_id', 'created_at')
+        rated_photos = Rating.objects.select_related('user', 'photo').values('user__username', 'photo__photo')
+
         return render_to_response(
             'history.html',
-            {'photos': result, 'photo_rating': photo_rating},
+            {'rated_photos': rated_photos},
             context_instance=RequestContext(request)
         )

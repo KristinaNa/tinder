@@ -1,28 +1,13 @@
 # -*- coding: utf-8 -*-
+from django.contrib.auth.models import User
 from django.db import models
-from django.utils import timezone
 
-
-class auth_user(models.Model):
-    username = models.CharField(max_length=30)
-    email = models.CharField(max_length=30)
-    password = models.CharField(max_length=30)
-
-class upload_foto(models.Model):
-    user_id = models.IntegerField()
-    #foto = models.CharField(max_length=30)
-    foto = models.FileField(upload_to='documents')
+class Photo(models.Model):
+    user = models.ForeignKey(User)
+    photo = models.FileField(upload_to='documents')
     created_at = models.DateTimeField(auto_now_add=True)
 
-class rating(models.Model):
-    user_id = models.IntegerField()
-    #foto_id = models.IntegerField()
-    foto = models.ForeignKey('upload_foto', blank=True, null=True)
+class Rating(models.Model):
+    user = models.ForeignKey(User)
+    photo = models.ForeignKey(Photo, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-
-
-
-
-class Meta:
-    app_label = 'app_model_belongs_to'
-
