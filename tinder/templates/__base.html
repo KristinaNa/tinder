@@ -5,13 +5,7 @@
 
     <style>
         #center {
-            top: 50%; /* Отступ в процентах от верхнего края окна */
-            left: 50%; /* Отступ в процентах от левого края окна */
-            width: 450px; /* Ширина блока */
-            height: 450px; /* Высота блока */
-            position: absolute; /* Абсолютное позиционирование блока */
-            margin-top: -225px; /* Отрицательный отступ от верхнего края страницы, должен равняться половине высоты блока со знаком минус */
-            margin-left: -225px; /* Отрицательный отступ от левого края страницы, должен равняться половине высоты блока со знаком минус */
+
         }
         form{
             margin-bottom: 5%;
@@ -37,10 +31,19 @@
         th, td {
             height: 115px;
         }
-        .table{
-            align-self: auto;
+        #table {
             overflow: auto;
+            top: 50%;
+            left: 70%;
+            width: 350px;
+            height: 450px;
+            position: absolute;
+            margin-top: -225px;
+            margin-left: -225px;
         }
+
+
+
     </style>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
         {% block script %}{% endblock script %}
