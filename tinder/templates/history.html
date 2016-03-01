@@ -4,15 +4,12 @@
     {% if user.is_authenticated %}
         <div id="table">
             <table>
-                <thead>
                     {% for photo in rated_photos %}
                         <tr>
-                            <td><b> {{photo.user__username}}</b> likes</td>
+                            <td><b> {{photo.user__username}}</b> likes<br> <i>{{ photo.created_at }}</i></td>
                             <td><img src = "{{ photo.photo__photo }}" class = "img-rounded" width="100" height="100"></td>
-                                               <tr><td>   <i>  {{ photo.created_at }} </i> </td></tr>
                         </tr>
                     {% endfor %}
-                </tbody>
             </table>
         </div>
     {% else %}

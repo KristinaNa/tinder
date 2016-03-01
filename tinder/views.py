@@ -88,7 +88,7 @@ class List(View):
 
 class History(View):
     def get(self, request):
-        rated_photos = Rating.objects.select_related('user', 'photo', 'rating').values('user__username', 'photo__photo', 'created_at')
+        rated_photos = Rating.objects.select_related('user', 'photo', 'rating').values('user__username', 'photo__photo', 'created_at').order_by('-created_at')
 
         return render_to_response(
             'history.html',

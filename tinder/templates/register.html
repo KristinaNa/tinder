@@ -1,10 +1,14 @@
 {% extends "__base.html" %}
 {% block title %}Registration page{% endblock title %}
 {% block content %}
-    <form action="" method="post">
-      {% csrf_token %}
-      <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
-      {{ form.as_p }}
-      <button type="submit">Зарегистрироваться</button>
-    </form>
+    <div class="wrapper" align="center">
+        <form class="form-signin" action="" method="post">
+          <h2 class="form-signin-heading">Registration</h2></br>
+            {% csrf_token %}
+            <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
+            {{ form.as_p }}
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Зарегистрироваться</button>
+        </form>
+    </div>
+
 {% endblock content %}
