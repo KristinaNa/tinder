@@ -1,15 +1,13 @@
 {% extends "__base.html" %}
+{% load crispy_forms_tags %}
+
 {% block title %}Login page{% endblock title %}
 {% block content %}
-    <div class="wrapper" align="center">
-        <form class="form-signin" action="" method="post">
-          <h2 class="form-signin-heading">Please login</h2></br>
-		  {% csrf_token %}
-          <input type="text" class="form-control" name="username" placeholder="Username" required="" autofocus="" />
-          <input type="password" class="form-control" name="password" placeholder="Password" required=""/>
+        {% csrf_token %}
+        <div class="form">
+            <h3><b>Login:</b></h3><br/>
+            {% crispy form %}
+            <a href="/register">Create account now!</a>
 
-		  <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button></br>
-          <a href="/register">Create account now!</a>
-        </form>
-      </div>
+        </div>
 {% endblock content %}

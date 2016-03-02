@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tinder',
+    'crispy_forms',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -98,18 +99,16 @@ WSGI_APPLICATION = 'mytinder.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    },
-    'postgresql': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'tinder_db',
-        'USER': '',
+        'USER': 'postgres',
         'PASSWORD': '123456',
         'HOST': 'localhost',
         'PORT': '5432',
     }
 }
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/

@@ -6,7 +6,7 @@ from tinder.forms import PhotoForm
 from django.views.generic.edit import FormView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from django.http import HttpResponseRedirect
 from django.views.generic.base import View
 from django.contrib.auth import logout
@@ -21,7 +21,14 @@ class RegisterFormView(FormView):
     template_name = "register.html"
     def form_valid(self, form):
         form.save()
+        #get the username and password
+        username = self.request.POST['username']
+        password = self.request.POST['password1']
+        #authenticate user then login
+        user = authenticate(username=username, password=password)
+        login(self.request, user)
         return super(RegisterFormView, self).form_valid(form)
+
 
 
 class LoginFormView(FormView):
