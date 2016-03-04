@@ -34,13 +34,12 @@
         }
     </script>
 {% endblock script %}
-
-
 {% block content %}
         <div class="col-lg-3 col-md-3 col-xs-6 thumb" id="center" align="center">
-        <div id="photo">
-            {% include "photo_content.html" %}
-        </div>
+            <div id="photo">
+                {% include "photo_content.html" %}
+            </div>
+
             <form action="#" id="rating_form" >
                 <button type="button" class="btn btn-default btn-lg" id="like">
                   <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>

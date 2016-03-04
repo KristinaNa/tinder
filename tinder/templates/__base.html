@@ -1,56 +1,9 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
     <head>
         <title> {% block title %}{% endblock title %} </title>
-
-    <style>
-        form{
-            margin-bottom: 5%;
-        }
-        #rating {
-            text-align: center;
-            color: black;
-            border-radius: 10px;
-            border-color: black;
-        }
-         #rating_form{
-             display: none;
-          }
-        #content {
-            position: relative;
-        }
-        #content img {
-            position: absolute;
-            top: 0px;
-            right: 0px;
-        }
-
-        .form{
-            top: 50%;
-            left: 50%;
-            width: 350px;
-
-            position: absolute;
-            margin-top: -225px;
-            margin-left: -225px;
-        }
-        th, td {
-            height: 115px;
-        }
-        #table {
-            overflow: auto;
-            top: 50%;
-            left: 70%;
-            width: 350px;
-            height: 450px;
-            position: absolute;
-            margin-top: -225px;
-            margin-left: -225px;
-        }
-
-
-
-    </style>
+        <link rel="stylesheet" href="{% static 'style.css' %}" />
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
         {% block script %}{% endblock script %}
     </head>
