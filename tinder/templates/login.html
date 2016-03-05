@@ -6,6 +6,12 @@
         {% csrf_token %}
         <div class="form">
             <h3><b>Login:</b></h3><br/>
+            <div class="alert alert-info" role="alert">
+                <b>For login</b><br/>
+                Username: <b>DemoUser</b><br/>
+                Password: <b>demo123</b>
+            </div>
+
             {% crispy form %}
             <a href="/register">Create account now!</a>
 
