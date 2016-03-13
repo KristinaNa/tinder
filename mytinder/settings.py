@@ -100,10 +100,10 @@ WSGI_APPLICATION = 'mytinder.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'tinder_db',
-        'USER': 'postgres',
-        'PASSWORD': '123456',
-        'HOST': 'localhost',
+        'NAME': 'd1qi9sbc3i2u4l',
+        'USER': 'sawbsunksvyhbi',
+        'PASSWORD': 'PGOixcOhQf3c4ad1TMIOurz48m',
+        'HOST': 'ec2-54-204-12-25.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }
