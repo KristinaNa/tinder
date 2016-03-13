@@ -131,7 +131,7 @@ STATIC_URL = '/documents/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "documents"),
-    '/tinder/documents/',
+    'documents/',
 ]
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
