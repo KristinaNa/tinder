@@ -133,3 +133,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "documents"),
     '/tinder/documents/',
 ]
+
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
