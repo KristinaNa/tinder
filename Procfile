@@ -1,1 +1,1 @@
-web: gunicorn tinder.wsgi --log-file -
+web: gunicorn mytinder.wsgi --log-file -
