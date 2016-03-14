@@ -4,8 +4,8 @@ from django.template import RequestContext
 from tinder.models import *
 from tinder.forms import PhotoForm
 from django.views.generic.edit import FormView
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.forms import AuthenticationForm
+from .forms import UserCreationForm
+from .forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
 from django.http import HttpResponseRedirect
 from django.views.generic.base import View
