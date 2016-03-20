@@ -4,7 +4,7 @@ from django.db import models
 
 class Photo(models.Model):
     user = models.ForeignKey(User)
-    photo = models.FileField(upload_to='static')
+    photo = models.FileField(upload_to='mytinder/static')
     created_at = models.DateTimeField(auto_now_add=True)
 
 class Rating(models.Model):
