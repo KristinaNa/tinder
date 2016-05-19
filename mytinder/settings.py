@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -100,11 +103,11 @@ WSGI_APPLICATION = 'mytinder.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd1qi9sbc3i2u4l',
-        'USER': 'sawbsunksvyhbi',
-        'PASSWORD': 'PGOixcOhQf3c4ad1TMIOurz48m',
-        'HOST': 'ec2-54-204-12-25.compute-1.amazonaws.com',
-        'PORT': '5432',
+        'NAME': 'tinder',
+        'USER': 'postgres',
+        'PASSWORD': '123456',
+        'HOST': '',
+        'PORT': '',
     }
 }
 
@@ -139,5 +142,10 @@ STATICFILES_DIRS = (
     os.path.join('static'),
 )
 
+#FILE_UPLOAD_HANDLERS = ("django.core.files.uploadhandler.TemporaryFileUploadHandler")
 #STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-
+cloudinary.config(
+  cloud_name = "dxmohw0cr",
+  api_key = "193666132885693",
+  api_secret = "V1esRt_ILzlScvGQIlV9M-ns1L0"
+)

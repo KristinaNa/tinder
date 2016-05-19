@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+import time
+from cloudinary.templatetags import cloudinary
+from django.contrib.sites import requests
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from tinder.models import *
@@ -13,6 +16,13 @@ from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.db.models import Q
 from django.contrib.auth.models import User
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+from django.utils.dateformat import format
+import os
+
+
 
 
 class RegisterFormView(FormView):
@@ -86,10 +96,16 @@ class List(View):
         )
     def post(self, request):
         form = PhotoForm(request.POST, request.FILES)
+        timestamp_string = str(time.time())
+        file=request.FILES['foto'].name
+        file=os.path.splitext(file)[0]
+        file_name=timestamp_string+"_"+file
+
         if form.is_valid():
-            newdoc = Photo(photo = request.FILES['foto'])
-            newdoc.user_id = request.user.id
-            newdoc.save()
+            cloudinary.uploader.upload(request.FILES['foto'], public_id = file_name )
+            p = Photo(user_id=request.user.id, photo=file_name)
+            p.save()
+
             # Redirect to the document list after POST
             return redirect('/my_photos')
 
