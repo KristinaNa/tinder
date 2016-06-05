@@ -126,7 +126,7 @@ class History(View):
 class Main(View):
     def get(self, request):
 
-        if request.user.is_authenticated:
+        if request.user.is_authenticated():
             return redirect('/history')
         else:
             return render_to_response(
