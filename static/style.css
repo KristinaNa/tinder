@@ -51,4 +51,11 @@
         .img-thumbnail{
             margin-top: 10px;
         }
-
+        .col-md-4.well{
+            width: 30%;
+            margin-right: 10px;
+        }
+        .content{
+            width: 80%;
+            margin: 0 auto;
+        }

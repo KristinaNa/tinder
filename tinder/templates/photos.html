@@ -2,25 +2,31 @@
 {% load static %}
 {% block title %}Find partner{% endblock title %}
 {% block script %}
-    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
     <script>
+    function hide_buttons(){
+        $("#rating_form").hide();
+    }
     $(document).ready(function() {
         next_photo();
         $("#like").on("click",function (){
+            hide_buttons();
             photo_id = $("#user_photo").attr("data-photoid");
             console.log("like click "+photo_id);
-            next_photo(photo_id);
+            next_photo(photo_id, true);
         });
         $("#dislike").on("click",function() {
-            next_photo();
+            photo_id = $("#user_photo").attr("data-photoid");
+            hide_buttons();
+            next_photo(photo_id, false);
         });
     });
-    function next_photo(photo_id){
+    function next_photo(photo_id, like){
             console.log("next-func "+photo_id);
             $.ajax({
               data: {
                   csrfmiddlewaretoken: '{{ csrf_token }}',
-                  photo_id: photo_id
+                  photo_id: photo_id,
+                  like: like
               },
               type: "POST" ,
               url: '/photos/',
@@ -37,7 +43,7 @@
 {% block content %}
         <div class="col-lg-3 col-md-3 col-xs-6 thumb" id="center" align="center">
             <div id="photo">
-                {% include "photo_content.html" %}
+                <h3>Loading photo..</h3>
             </div>
 
             <form action="#" id="rating_form" >

@@ -1,0 +1,28 @@
+{% extends "__base.html" %}
+{% load staticfiles %}
+
+{% block title %}Main page{% endblock title %}
+{% block content %}
+
+    <div class="row">
+        <div class="col-xs-6 col-md-5">
+            <img src="{% static 'img/picture1.jpg' %}" width="400" height="400" class="img-thumbnail"><br/>
+            <img src="{% static 'img/picture2.jpg' %}" width="400" height="400" class="img-thumbnail">
+        </div>
+        <div class="col-xs-6 col-md-5"><br/>
+            <p> This application was built for self-educational purposes. It allows users to authenticate, upload their own photos and vote for other user’s photos.<br/>
+               <br/> Technologies used to create this application:
+                <ul class="list-group">
+                  <li class="list-group-item">Python 2.7 | Django 1.8.6</li>
+                  <li class="list-group-item">PostgreSQL 9.5</li>
+                  <li class="list-group-item">Javascript | JQuery </li>
+                  <li class="list-group-item">Hosted on Heroku</li>
+                </ul>
+            </p>
+            <center>
+            <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='/login'" >Sign in</button>
+            <button type="button" class="btn btn-default btn-lg" onclick="window.location.href='/register'">Sign up</button></center>
+        </div>
+
+    </div>
+{% endblock content %}

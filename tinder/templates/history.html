@@ -4,16 +4,18 @@
 {% block title %}Main page{% endblock title %}
 {% block content %}
     {% if user.is_authenticated %}
-        <div id="table">
-            <table>
-                    {% for photo in rated_photos %}
-                        <tr>
-                            <td><b> {{photo.user__username}}</b> likes<br> <i>{{ photo.created_at }}</i></td>
-                            <td><img src = "{{ photo.photo__photo }}" class = "img-rounded" width="100" height="100"></td>
-                        </tr>
-                    {% endfor %}
-            </table>
+        <h3>Recent likes: </h3>
+        <div></div>
+        <div class="row">
+            {% for photo in rated_photos %}
+                <div class="col-md-4 well">
+                    <b> {{photo.user__username}}</b><br/><i>{{ photo.created_at }}</i>
+                    <img src = "http://res.cloudinary.com/dxmohw0cr/image/upload/v1463667700/{{ photo.photo__photo }}" class = "img-rounded" width="100" height="100">
+                </div>
+            {% endfor %}
         </div>
+
+
     {% else %}
         <div class="row">
             <div class="col-xs-6 col-md-5">

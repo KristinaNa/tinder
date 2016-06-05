@@ -44,6 +44,8 @@ INSTALLED_APPS = (
     'crispy_forms',
 )
 
+LOGIN_URL = '/login'
+
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

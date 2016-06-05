@@ -21,9 +21,11 @@ import cloudinary.uploader
 import cloudinary.api
 from django.utils.dateformat import format
 import os
+from django.contrib.auth.decorators import login_required
 
 
-
+def ValuesQuerySetToDict(vqs):
+    return [item for item in vqs]
 
 class RegisterFormView(FormView):
     form_class = UserCreationForm
@@ -44,7 +46,7 @@ class RegisterFormView(FormView):
 class LoginFormView(FormView):
     form_class = AuthenticationForm
     template_name = "login.html"
-    success_url = "/"
+    success_url = "/history"
     def form_valid(self, form):
         self.user = form.get_user()
         login(self.request, self.user)
@@ -65,13 +67,15 @@ class Photos(View):
     def post(self, request):
         current_user = request.user
         photo_id = request.POST.get('photo_id')
+        like = request.POST.get('like')
 
-        if photo_id:
-           # photo_id = request.POST.get('photo_id')
+        if like == 'true' and photo_id is not None:
             insert_like = Rating(user_id=current_user.id,photo_id= photo_id)
             insert_like.save()
 
-        rated_photos = Rating.objects.values_list('photo_id', flat=True).filter(user_id = current_user.id)
+        rated_photos = ValuesQuerySetToDict(Rating.objects.filter(user_id = current_user.id).values_list('photo_id', flat=True))
+        if photo_id is not None: rated_photos.append(photo_id)
+
         all_photos = Photo.objects.values('photo','id').filter(~Q(user_id = current_user.id)).exclude(id__in=rated_photos).order_by('?').first()
 
         return render_to_response(
@@ -118,3 +122,14 @@ class History(View):
             {'rated_photos': rated_photos},
             context_instance=RequestContext(request)
         )
+
+class Main(View):
+    def get(self, request):
+
+        if request.user.is_authenticated:
+            return redirect('/history')
+        else:
+            return render_to_response(
+                'main.html',
+                context_instance=RequestContext(request)
+            )
